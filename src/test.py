@@ -1,7 +1,7 @@
 from car_info import CarInfo
 
 
-def main(number: str) -> None:
+def get_data(number: str) -> None:
     car = CarInfo(number)
 
     # Receiving data in Pydantic form
@@ -15,12 +15,17 @@ def main(number: str) -> None:
     print('img:', data.image)
 
 
-    # # # # # # # # # # # # # # # # # # # # 
-    # print('\nВся полученная информация:')
-    # for i in data:
-    #     print(f'{i[0].title()}: {i[1]}')
+def get_all_data(number: str) -> None:
+    car = CarInfo(number)
 
-
-number = "Р123НУ97"
+    # Receiving data in Pydantic form
+    data = car.get_data()
     
-main(number)
+    print('\nВся полученная информация:')
+    for i in data:
+        print(f'{i[0].title()}: {i[1]}')
+
+
+if __name__ == '__main__':
+    number = "Р123НУ97"
+    get_data(number)

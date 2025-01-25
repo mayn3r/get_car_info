@@ -34,10 +34,7 @@ class CarInfo:
         
         # Half of the basic information about the car is in the form of a dictionary, 
         # where the name of the key is written with a capital letter
-        try:
-            first_result: Dict = self._data._snapshot['data']['details'][0]['result'][0]
-        except KeyError:
-            return None
+        first_result: Dict = self._data._snapshot['data']['details'][0]['result'][0]
         
         # Changing the case in the key name to a small one
         result: Dict = {i.lower(): k for i, k in first_result.items()}
