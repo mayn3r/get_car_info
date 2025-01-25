@@ -1,7 +1,9 @@
 from car_info import CarInfo
 
-car = CarInfo('е005кх05')
+license_plate = "Р888НУ97"
+
+car = CarInfo(license_plate)
     
 vin = car.vin
 print('Номер:', car.car_number)
-print('vin:', vin)
+print('vin:', vin.vin)
