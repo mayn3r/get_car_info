@@ -1,10 +1,14 @@
 import requests
+import json
 import re
 
 from bs4 import BeautifulSoup
-from typing import Dict
+from typing import Dict, Optional, Union
 
+from pydantic_core._pydantic_core import ValidationError
 from json.decoder import JSONDecodeError
+
+from .models import CarSnapshotModel
 
 
 class CarInfo:
@@ -18,10 +22,34 @@ class CarInfo:
     def __init__(self, number: str):
         self.car_number: str = number.replace(' ', '').strip().upper()
         
-        
-        self.vin = self.Vin(self)
+        self._data = self.Data(self)
+        self._model: Optional[CarSnapshotModel] = None
     
-    class Vin:
+    
+    def get_data(self) -> Union[CarSnapshotModel, Dict]:
+        """ Converting data from 'snapshot' to pydantic model """
+        if self._model:
+            return self._model
+        
+        # Half of the basic information about the car is in the form of a dictionary, 
+        # where the name of the key is written with a capital letter
+        first_result: Dict = self._data._snapshot['data']['details'][0]['result'][0]
+        
+        # Changing the case in the key name to a small one
+        result: Dict = {i.lower(): k for i, k in first_result.items()}
+        result.pop('image')
+        
+        try:
+            # Creating a pydantic model with the received data
+            self._model = CarSnapshotModel.model_validate(result)
+        except ValidationError:
+            # In case of errors with Pydantic, the function returns a dictionary with data.
+            self._model = result
+            
+        return self._model
+        
+    
+    class Data:
         """
         Getting a vin number by a government number using parsing
         """
@@ -37,7 +65,7 @@ class CarInfo:
             self._cookies: Dict[str] = self._get_cookies()
             
             # Immediately upon initialization of the class, we get the vin number
-            self.vin: str = self.get_vin()
+            self._snapshot: str = self.get_result()
         
         
         def __str__(self):
@@ -69,7 +97,7 @@ class CarInfo:
             return cookies.get_dict()
             
             
-        def _get_data(self) -> tuple:
+        def _get_auth_data(self) -> tuple:
             """ Getting a 'token' and a 'snapshot' are necessary to generate a request when receiving a vin
 
             Returns:
@@ -90,15 +118,12 @@ class CarInfo:
             return (token, snapshot)
             
             
-        def get_vin(self) -> str:
-            """ Getting a vin number, you do not need to enter the state number of the car, because the received token is responsible for it.
-
-            Returns:
-                _type_: _description_
+        def get_result(self) -> Dict:
+            """ Getting a data, you do not need to enter the state number of the car, because the received token is responsible for it.
             """
             
             # 
-            token, snapshot = self._get_data()
+            token, snapshot = self._get_auth_data()
                     
             # Data required when generating a request for a vin number  
             json_data = {
@@ -130,14 +155,11 @@ class CarInfo:
             try:
                 # We are trying to pull a snapshot from the response,
                 # if the response is not converted to a JSON object, then an error has occurred.
-                snapshot = response.json()['components'][0]['snapshot']
+                snapshot: Dict = json.loads(response.json()['components'][0]['snapshot'])
                 
-                # We get a lot of extra stuff in the response, and we find and pull the vin out of this garbage.
-                vin: str = re.findall(r'"vin":"([a-zA-Z0-9]*)"', snapshot)[0]
-            
             except (JSONDecodeError, IndexError):
-                raise ValueError('Не удалось получить VIN по этому гос номеру')
+                raise ValueError('Не удалось получить данные по этому гос номеру')
             
-            return vin
+            return snapshot
 
 

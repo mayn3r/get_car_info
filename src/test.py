@@ -1,9 +1,20 @@
 from car_info import CarInfo
 
-license_plate = "Р888НУ97"
+number = "а005аа05"
 
-car = CarInfo(license_plate)
-    
-vin = car.vin
-print('Номер:', car.car_number)
-print('vin:', vin.vin)
+car = CarInfo(number=number)
+
+# Receiving data in Pydantic form
+data = car.get_data()
+
+print('Номер:', data.number)
+print('vin:', data.vin)
+print('Марка:', data.marka)
+print('Модель:', data.model)
+print('Год производства:', data.year)
+
+
+# # # # # # # # # # # # # # # # # # # # 
+# print('\nВся полученная информация:')
+# for i in data:
+#     print(f'{i[0].title()}: {i[1]}')
