@@ -11,3 +11,4 @@ class CarSnapshotModel(BaseModel):
     color: Optional[str]
     volume: Union[int, float]
     horsepower: Union[int, float]
+    image: Optional[str]

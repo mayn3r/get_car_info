@@ -19,8 +19,9 @@ class CarInfo:
         number -> The state number of the car, format: A001AA01 (The letters must be written in Cyrillic.)
     """
     
-    def __init__(self, number: str):
+    def __init__(self, number: str, **kwargs):
         self.car_number: str = number.replace(' ', '').strip().upper()
+        self._debug: bool = bool(kwargs.get('debug', 0))
         
         self._data = self.Data(self)
         self._model: Optional[CarSnapshotModel] = None
@@ -33,17 +34,22 @@ class CarInfo:
         
         # Half of the basic information about the car is in the form of a dictionary, 
         # where the name of the key is written with a capital letter
-        first_result: Dict = self._data._snapshot['data']['details'][0]['result'][0]
+        try:
+            first_result: Dict = self._data._snapshot['data']['details'][0]['result'][0]
+        except KeyError:
+            return None
         
         # Changing the case in the key name to a small one
         result: Dict = {i.lower(): k for i, k in first_result.items()}
-        result.pop('image')
         
         try:
             # Creating a pydantic model with the received data
             self._model = CarSnapshotModel.model_validate(result)
         except ValidationError:
             # In case of errors with Pydantic, the function returns a dictionary with data.
+            if self._debug:
+                print('[DEBUG] -> Warning! An error occurred when trying to translate a JSON object to the Pydantic model. The object is returned as a dictionary')
+            
             self._model = result
             
         return self._model
@@ -152,13 +158,21 @@ class CarInfo:
                 cookies=self._cookies
             )
             
+            error = ValueError('Не удалось получить данные по этому гос номеру')
+            
             try:
                 # We are trying to pull a snapshot from the response,
                 # if the response is not converted to a JSON object, then an error has occurred.
                 snapshot: Dict = json.loads(response.json()['components'][0]['snapshot'])
                 
+                if not snapshot['data']['details'][0].get('result'):
+                    if self.car_info_obj._debug:
+                        print(f'[DEBUG] -> {snapshot=}')
+                        
+                    raise error
+                
             except (JSONDecodeError, IndexError):
-                raise ValueError('Не удалось получить данные по этому гос номеру')
+                raise error
             
             return snapshot
 
