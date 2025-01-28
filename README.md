@@ -5,6 +5,7 @@
 ```python
 from car_info import CarInfo
 
+# Укажите российский автомобильный номер в формате А123АА97
 car = CarInfo('Е005КХ05')
 data = car.get_data()
 
