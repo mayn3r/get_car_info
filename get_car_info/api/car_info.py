@@ -1,6 +1,5 @@
 import requests
 import json
-import re
 
 from bs4 import BeautifulSoup
 from typing import Dict, Optional, Union
@@ -8,7 +7,7 @@ from typing import Dict, Optional, Union
 from pydantic_core._pydantic_core import ValidationError
 from json.decoder import JSONDecodeError
 
-from .models import CarSnapshotModel
+from get_car_info.models import CarSnapshotModel
 
 
 class CarInfo:
@@ -125,7 +124,7 @@ class CarInfo:
             """ Getting a data, you do not need to enter the state number of the car, because the received token is responsible for it.
             """
             
-            # 
+            # Getting 'token' and 'snapshot' for forming a request
             token, snapshot = self._get_auth_data()
                     
             # Data required when generating a request for a vin number  
@@ -155,7 +154,7 @@ class CarInfo:
                 cookies=self._cookies
             )
             
-            error = ValueError('Не удалось получить данные по этому гос номеру')
+            error = ValueError('Не удалось получить данные по этому номеру')
             
             try:
                 # We are trying to pull a snapshot from the response,

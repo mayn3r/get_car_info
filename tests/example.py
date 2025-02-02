@@ -1,4 +1,10 @@
-from car_info import CarInfo
+import sys
+sys.path.extend(['../get_car_info/', '../../get_car_info/'])  
+
+
+from get_car_info import CarInfo
+
+number = "Е005КХ05"
 
 
 def get_data(number: str) -> None:
@@ -21,11 +27,10 @@ def get_all_data(number: str) -> None:
     # Receiving data in Pydantic form
     data = car.get_data()
     
-    print('\nВся полученная информация:')
+    print('Вся полученная информация:')
     for i in data:
         print(f'{i[0].title()}: {i[1]}')
 
 
 if __name__ == '__main__':
-    number = "х917ут161"
-    get_all_data(number)
+    get_data(number)
