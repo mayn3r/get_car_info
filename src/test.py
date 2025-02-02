@@ -2,7 +2,7 @@ from car_info import CarInfo
 
 
 def get_data(number: str) -> None:
-    car = CarInfo(number, debug=True)
+    car = CarInfo(number)
 
     # Receiving data in Pydantic form
     data = car.get_data()
