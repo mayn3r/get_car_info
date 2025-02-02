@@ -133,7 +133,7 @@ class CarInfo:
                 '_token': token,
                 'components': [
                     {
-                        'snapshot': f'{snapshot}',
+                        'snapshot': snapshot,
                         'updates': {},
                         'calls': [
                             {

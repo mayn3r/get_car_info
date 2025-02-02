@@ -2,7 +2,7 @@ from car_info import CarInfo
 
 
 def get_data(number: str) -> None:
-    car = CarInfo(number)
+    car = CarInfo(number, debug=True)
 
     # Receiving data in Pydantic form
     data = car.get_data()
@@ -27,5 +27,5 @@ def get_all_data(number: str) -> None:
 
 
 if __name__ == '__main__':
-    number = "Р123НУ97"
-    get_data(number)
+    number = "х917ут161"
+    get_all_data(number)
