@@ -1,5 +1,7 @@
 <h1>Получение информации по госномеру</h1>
 
+> [The project on PyPI](https://pypi.org/project/get-car-info/)
+
 <h3>Использование:</h3>
 
 ```python
