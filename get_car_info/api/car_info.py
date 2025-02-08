@@ -9,13 +9,12 @@ from json.decoder import JSONDecodeError
 
 from get_car_info.models import CarSnapshotModel
 
-
 class CarInfo:
     """
     Getting information about a car using Russian state license plates
     
     Args:
-        number -> The state number of the car, format: A001AA01 (The letters must be written in Cyrillic.)
+        number -> The state number of the car, format: A001AA01 (The letters must be written in Cyrillic.
     """
     
     def __init__(self, number: str, **kwargs):
@@ -24,6 +23,18 @@ class CarInfo:
         
         self._data = self.Data(self)
         self._model: Optional[CarSnapshotModel] = None
+    
+    
+    def __repr__(self):
+        return 'CarInfo(number="%s", debug=%s)' % (self.car_number, self._debug)
+    
+
+    @property
+    def model(self):
+        if not self._model:
+            self.get_data()
+            
+        return self._model
     
     
     def get_data(self) -> Union[CarSnapshotModel, Dict]:
@@ -69,15 +80,9 @@ class CarInfo:
             # Immediately upon initialization of the class, we get the vin number
             self._snapshot: str = self.get_result()
         
-        
-        def __str__(self):
-            """ When outputting an object of the Vin class, we will get the vin number of the car. """
-            
-            return 'Vin("%s")' % self.vin
-
 
         def __repr__(self):
-            return 'CarInfo(number="%s").vin' % self.car_info_obj.car_number
+            return self.car_info_obj.__repr__() + '._data'
         
         
         def _get_headers(self) -> Dict:

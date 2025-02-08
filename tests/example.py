@@ -1,8 +1,8 @@
 import sys
 sys.path.extend(['../get_car_info/', '../../get_car_info/'])  
 
-
 from get_car_info import CarInfo
+
 
 number = "Е555КХ05"
 
