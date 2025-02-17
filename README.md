@@ -1,6 +1,7 @@
 <h1>Получение информации по госномеру</h1>
 
-> [The project on PyPI](https://pypi.org/project/get-car-info/)
+[![image](https://img.shields.io/pypi/v/get_car_info.svg)](https://pypi.org/project/get-car-info)
+[![image](https://img.shields.io/pypi/pyversions/get-car-info.svg)](https://pypi.org/project/get-car-info)
 
 <h3>Использование:</h3>
 
