@@ -1,5 +1,3 @@
-from get_car_info.models.car_model import CarSnapshotModel
+from .car import CarSnapshotModel
 
-__all__ = (
-    'CarSnapshotModel',
-)
+__all__ = ["CarSnapshotModel"]
