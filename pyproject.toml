@@ -1,0 +1,42 @@
+[project]
+name = "get-car-info"
+version = "0.1.0"
+description = "Search for information about the car by the Russian state number"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "beautifulsoup4>=4.13.3",
+    "httpx>=0.28.1",
+    "pydantic>=2.10.6",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.9.6",
+]
+test = [
+    "pytest>=8.3.4",
+    "pytest-asyncio>=0.25.3",
+]
+
+[tool.ruff]
+line-length = 140
+exclude = [
+    "migrations",
+    "manage.py",
+]
+
+[tool.ruff.lint]
+unfixable = ["B"]
+select = ["F","B","E","I","UP","N","ANN","Q"]
+ignore = ["ANN002", "ANN003", "ANN101", "ANN102", "ANN204"]
+
+# Копипаст, но можно именно в мой репозитория всё билдить, решать тебе.
+[[tool.uv.index]]
+name = "gitverse"
+url = "https://gitverse.ru/sweetdogs?tab=packages"
+publish-url = "https://gitverse.ru/api/packages/sweetdogs/pypi"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
