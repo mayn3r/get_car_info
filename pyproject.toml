@@ -1,23 +1,42 @@
 [project]
 name = "get-car-info"
-version = "1.0.2"
-description = "Поиск информации по госномеру"
-authors = [
-    {name = "mayn3r",email = "mayneryt@bk.ru"}
-]
+version = "0.1.0"
+description = "Search for information about the car by the Russian state number"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.12"
 dependencies = [
-    "pydantic (==2.10.6)",
-    "requests (>=2.32.3,<3.0.0)",
-    "lxml (>=5.3.0,<6.0.0)",
-    "bs4 (>=0.0.2,<0.0.3)"
+    "beautifulsoup4>=4.13.3",
+    "httpx>=0.28.1",
+    "pydantic>=2.10.6",
 ]
 
-[project.urls]
-repository = "https://github.com/mayn3r/get_car_info/tree/main"
+[dependency-groups]
+dev = [
+    "ruff>=0.9.6",
+]
+test = [
+    "pytest>=8.3.4",
+    "pytest-asyncio>=0.25.3",
+]
 
+[tool.ruff]
+line-length = 140
+exclude = [
+    "migrations",
+    "manage.py",
+]
+
+[tool.ruff.lint]
+unfixable = ["B"]
+select = ["F","B","E","I","UP","N","ANN","Q"]
+ignore = ["ANN002", "ANN003", "ANN101", "ANN102", "ANN204"]
+
+# Копипаст, но можно именно в мой репозитория всё билдить, решать тебе.
+[[tool.uv.index]]
+name = "gitverse"
+url = "https://gitverse.ru/sweetdogs?tab=packages"
+publish-url = "https://gitverse.ru/api/packages/sweetdogs/pypi"
 
 [build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"

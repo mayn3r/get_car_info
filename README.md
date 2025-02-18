@@ -8,8 +8,8 @@
 from car_info import CarInfo
 
 # Укажите российский автомобильный номер в формате А123АА97
-car = CarInfo('Е005КХ05')
-data = car.get_data()
+car = CarInfo()
+data = car.get_data("Е005КХ05")
 
 # Некоторая информация
 print('Номер:', data.number)
