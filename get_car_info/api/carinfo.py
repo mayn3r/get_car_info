@@ -1,6 +1,6 @@
 import json
 
-from httpx import Client, AsyncClient
+from httpx import AsyncClient, Client
 
 from get_car_info.base import BaseCarInfo
 from get_car_info.models import CarSnapshotModel

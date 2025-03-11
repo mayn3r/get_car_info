@@ -7,7 +7,7 @@
 <h3>Использование:</h3>
 
 ```python
-from car_info import CarInfo
+from get_car_info import CarInfo
 
 # Укажите российский автомобильный номер в формате А123АА97
 car = CarInfo()

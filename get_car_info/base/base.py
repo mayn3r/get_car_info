@@ -61,6 +61,7 @@ class BaseCarInfo(ABC):
             return model.parse_obj(data)
         if pydantic_version.split(".")[0] == "2":
             return model.model_validate(data)
+        
         raise ValueError("support pydantic version not found")
     
     @abstractmethod
