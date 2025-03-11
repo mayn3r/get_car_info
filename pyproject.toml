@@ -1,7 +1,10 @@
 [project]
 name = "get-car-info"
-version = "0.1.0"
+version = "0.2.0"
 description = "Search for information about the car by the Russian state number"
+authors = [
+    {name = "mayn3r",email = "mayneryt@bk.ru"}
+]
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -9,6 +12,9 @@ dependencies = [
     "httpx>=0.28.1",
     "pydantic>=2.10.6",
 ]
+
+[project.urls]
+repository = "https://github.com/mayn3r/get_car_info/tree/main"
 
 [dependency-groups]
 dev = [
@@ -31,11 +37,6 @@ unfixable = ["B"]
 select = ["F","B","E","I","UP","N","ANN","Q"]
 ignore = ["ANN002", "ANN003", "ANN101", "ANN102", "ANN204"]
 
-# Копипаст, но можно именно в мой репозитория всё билдить, решать тебе.
-[[tool.uv.index]]
-name = "gitverse"
-url = "https://gitverse.ru/sweetdogs?tab=packages"
-publish-url = "https://gitverse.ru/api/packages/sweetdogs/pypi"
 
 [build-system]
 requires = ["hatchling"]
