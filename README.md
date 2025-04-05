@@ -4,7 +4,18 @@
 [![Downloads](https://img.shields.io/pypi/dm/get-car-info)](https://pypistats.org/packages/get-car-info)
 [![image](https://img.shields.io/pypi/pyversions/get-car-info.svg)](https://pypi.org/project/get-car-info)
 
-<h3>Использование:</h3>
+<h2>Установка:</h2>
+<p>Через pip:</p>
+
+```shell
+pip install get-car-info
+```
+<p>Через uv:</p>
+
+```shell
+uv add get-car-info
+```
+<h2>Использование:</h2>
 
 ```python
 from get_car_info import CarInfo
@@ -24,7 +35,7 @@ print('Год производства:', data.year)
 При указании гос номера необходимо использовать кириллицу!
 <hr>
 
-> `car.get_data()` возвращает Pydantic объект, где описаны характеристики автомобиля
+> `car.get_data()` возвращает Pydantic объект, где описаны характеристики автомобиля.
 <hr>
 
 ###### • Вся полученная информация находится в общем доступе. Данные получены с помощью <a href="https://vinvision.ru/">www.vinvision.ru</a>
