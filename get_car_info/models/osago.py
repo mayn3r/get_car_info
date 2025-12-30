@@ -24,5 +24,4 @@ class OsagoModel(BaseModel):
     policyend_date: str = Field(alias="policyEndDate")
     drivers: list[Driver]
     drivers_amount: int = Field(alias="driversAmount")
-    type: str
     car_number: str = Field(alias="carNumber")

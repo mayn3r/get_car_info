@@ -1,3 +1,6 @@
-from .base import BaseCarInfo
+from .base import BaseCarInfo, ModeLiteral
 
-__all__ = ["BaseCarInfo"]
+__all__ = (
+    "BaseCarInfo", 
+    "ModeLiteral"
+)

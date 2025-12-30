@@ -20,9 +20,13 @@ uv add get-car-info
 ```python
 from get_car_info import CarInfo
 
-# Укажите российский автомобильный номер в формате А123АА97
 car = CarInfo()
-data = car.get_data("Е005КХ05")
+
+# Укажите российский автомобильный номер в формате А123АА97
+data = car.get_data(car_number="Е005КХ05")
+
+# Или укажите VIN номер
+data = car.get_data(vin="1GCCT14W6W8579031")
 
 # Некоторая информация
 print('Номер:', data.number)

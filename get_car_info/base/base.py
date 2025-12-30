@@ -1,11 +1,14 @@
 from abc import ABC, abstractmethod
-from typing import Any, Generic, TypeVar
+from typing import Any, Generic, Literal, TypeVar
 
 from bs4 import BeautifulSoup
 from httpx import Response
 from pydantic import __version__ as pydantic_version
 
 from get_car_info.models import CarSnapshotModel, OsagoModel
+
+ModeLiteral = Literal["gosnumber", "vin"]
+
 
 T = TypeVar("T", bound="BaseCarInfo")
 class BaseCarInfo(ABC):
@@ -14,7 +17,7 @@ class BaseCarInfo(ABC):
             self.car_info = car_info
 
         @abstractmethod
-        def _get_auth_data(self, car_number: str) -> Response:
+        def _get_auth_data(self, obj: str, mode: ModeLiteral) -> Response:
             ...
 
         @staticmethod
@@ -29,7 +32,7 @@ class BaseCarInfo(ABC):
             self.car_info = car_info
 
         @abstractmethod
-        def _get_result(self, car_number: str) -> Response:
+        def _get_result(self, obj: str, mode: ModeLiteral) -> Response:
             ...
 
         @staticmethod
