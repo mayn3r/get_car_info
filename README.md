@@ -30,6 +30,13 @@ print('vin:', data.vin)
 print('Марка:', data.marka)
 print('Модель:', data.model)
 print('Год производства:', data.year)
+
+# Для получения сведений ОСАГО
+osago = car.get_osago("Е005КХ05")
+
+print("Собственник", osago.username)
+print("Водители", osago.drivers)
+print("Компания", osago.company_name)
 ```
 
 При указании гос номера необходимо использовать кириллицу!
@@ -38,4 +45,4 @@ print('Год производства:', data.year)
 > `car.get_data()` возвращает Pydantic объект, где описаны характеристики автомобиля.
 <hr>
 
-###### • Вся полученная информация находится в общем доступе. Данные получены с помощью <a href="https://vinvision.ru/">www.vinvision.ru</a>
+###### • Вся полученная информация находится в общем доступе. Данные получены с помощью <a href="https://vinvision.ru/">www.vinvision.ru</a> и <a href="https://sravni.ru/">www.sravni.ru</a>

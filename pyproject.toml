@@ -1,9 +1,9 @@
 [project]
 name = "get-car-info"
-version = "0.2.0"
+version = "0.3.0"
 description = "Search for information about the car by the Russian state number"
 authors = [
-    {name = "mayn3r",email = "mayneryt@bk.ru"}
+    {name="mayn3r", email="mayneryt@bk.ru"}
 ]
 readme = "README.md"
 requires-python = ">=3.12"

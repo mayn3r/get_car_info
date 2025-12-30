@@ -12,3 +12,4 @@ class CarSnapshotModel(BaseModel):
     volume: int | float
     horsepower: int | float
     image: str | None
+    
