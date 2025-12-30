@@ -47,8 +47,11 @@ class CarInfo(BaseCarInfo):
 
         return self._get_model(CarSnapshotModel, res)
     
-    def get_osago(self, car_number: str) -> type[OsagoModel] | None:
+    def get_osago(self, car_number: str | type[CarSnapshotModel]) -> type[OsagoModel] | None:
         """ Попытка получения данных ОСАГО """
+        
+        if not isinstance(car_number, str):
+            car_number = car_number.number
         
         url = "https://www.sravni.ru/proxy-osagoinsurance/getPrevCalculationOrPolicy/"
         data = {"carNumber": car_number.upper(), "isShortProlongation": True}
@@ -102,8 +105,11 @@ class AsyncCarInfo(BaseCarInfo):
 
         return self._get_model(CarSnapshotModel, res)
     
-    async def get_osago(self, car_number: str) -> type[OsagoModel] | None:
+    async def get_osago(self, car_number: str | type[CarSnapshotModel]) -> type[OsagoModel] | None:
         """ Попытка получения данных ОСАГО """
+        
+        if not isinstance(car_number, str):
+            car_number = car_number.number
         
         url = "https://www.sravni.ru/proxy-osagoinsurance/getPrevCalculationOrPolicy/"
         data = {"carNumber": car_number.upper(), "isShortProlongation": True}

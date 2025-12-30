@@ -1,6 +1,6 @@
 [project]
 name = "get-car-info"
-version = "0.3.2"
+version = "0.3.3"
 description = "Search for information about the car by the Russian state number"
 authors = [
     {name="mayn3r", email="mayneryt@bk.ru"}
